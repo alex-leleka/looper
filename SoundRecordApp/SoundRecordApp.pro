@@ -13,10 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+<<<<<<< HEAD
         mainwindow.cpp \
     audiorecordengine.cpp
 
 HEADERS  += mainwindow.h \
     audiorecordengine.h
+=======
+        mainwindow.cpp
+
+HEADERS  += mainwindow.h
+>>>>>>> 84431987ea3472e78bdfcf298c4b9703df814e3f
 
 FORMS    += mainwindow.ui
