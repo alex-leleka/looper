@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Debug Folder
+build-*-Debug/*
+
+#Qt creator user files
+*.pro.user
