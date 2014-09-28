@@ -4,25 +4,31 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets multimedia opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = SoundRecordApp
 TEMPLATE = app
 
+CONFIG += c++11
 
 SOURCES += main.cpp\
-<<<<<<< HEAD
         mainwindow.cpp \
-    audiorecordengine.cpp
+    audiorecordengine.cpp \
+    audiorecordenginesettings.cpp \
+    recordersettings.cpp
 
 HEADERS  += mainwindow.h \
-    audiorecordengine.h
-=======
+    audiorecordengine.h \
+    audiorecordenginesettings.h \
+    recordersettings.h
         mainwindow.cpp
 
 HEADERS  += mainwindow.h
->>>>>>> 84431987ea3472e78bdfcf298c4b9703df814e3f
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    recordersettings.ui
+
+RESOURCES += \
+    SoundRecordApp.qrc
