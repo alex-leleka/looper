@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-
+#include <QTimer>
+#include <QMediaPlayer>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -33,6 +33,8 @@ private:
     Ui::MainWindow *ui;
 
     AudioRecordEngine * m_audioRecordEngine;
+    const AudioRecordEngineSettings * m_lastSettings;
+    QMediaPlayer m_mediaPlayer;
 protected:
     void closeEvent(QCloseEvent *event);
 
@@ -45,6 +47,10 @@ private slots:
     void tooglePlay(bool state);
     void pressStop();
     void settingsWindow();
+    void updateRecordingTime();
+    void playerPositionChanged(qint64);
+    void playerStateChangedHandle(QMediaPlayer::State);
+    void playerSliderValueChanged(int);
 private:
     void createActions();
     void createMenus();
@@ -56,10 +62,12 @@ private:
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);
     QString strippedName(const QString &fullFileName);
-
+    void startStatusUpdate();
+    void stopStatusUpdate();
+    QString convertToTimeString(qint64 len);
     QString curFile;
     bool modified;
-
+    QTimer statusUpdateTimer;
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *helpMenu;

@@ -4,10 +4,12 @@
 #include <QMediaRecorder>
 
 #include "audiorecordengine.h"
+#include "audiorecordenginesettings.h"
 namespace AudioRecordEngineLib {
     AudioRecordEngine::AudioRecordEngine(QObject *parent) :
         QObject(parent)
     {
+        // TODO: add volume sensitivity adjuster
         m_audioRecorder = new QAudioRecorder(this);
         m_probe = new QAudioProbe;
         m_probe->setSource(m_audioRecorder);
@@ -39,7 +41,7 @@ namespace AudioRecordEngineLib {
         else
             m_audioRecorder->record();
     }
-    bool AudioRecordEngine::isRecording()
+    bool AudioRecordEngine::isRecording() const
     {
         return !(m_audioRecorder->state() == QMediaRecorder::StoppedState);
     }
@@ -62,8 +64,24 @@ namespace AudioRecordEngineLib {
         QFileInfo fileInfo(newName);
         return m_file.copy(fileInfo.absoluteFilePath());//newName);
     }
-    qint64 AudioRecordEngine::getRecordSize()
+    qint64 AudioRecordEngine::getRecordSize() const
     {
         return m_file.size();
+    }
+
+    qint64 AudioRecordEngine::duration() const
+    {
+        return m_audioRecorder->duration();
+    }
+
+    QString AudioRecordEngine::getAudioFileName() const
+    {
+        return m_file.fileName();
+    }
+
+    void AudioRecordEngine::applyAudioRecorderSettings(const AudioRecordEngineSettings & settings)
+    {
+        m_audioRecorder->setAudioInput(settings.audioInputDevice());
+        m_audioRecorder->setEncodingSettings(settings.settings(), QVideoEncoderSettings(), settings.container());
     }
 }

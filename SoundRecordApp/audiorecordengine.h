@@ -23,7 +23,9 @@ namespace AudioRecordEngineLib {
         explicit AudioRecordEngine(QObject *parent = 0);
         ~AudioRecordEngine();
         AudioRecordEngine & operator=(const AudioRecordEngine &) = delete;
-        qint64 getRecordSize();
+        qint64 getRecordSize() const;
+        qint64 duration() const;
+        void applyAudioRecorderSettings(const AudioRecordEngineSettings &settings);
     signals:
         void raiseErrorMessage(QString);
     public slots:
@@ -32,8 +34,10 @@ namespace AudioRecordEngineLib {
         void pauseRecording();
         void stopRecording();
         bool saveRecord(const QString&);
+        QString getAudioFileName() const;
         void clear();
-        bool isRecording();
+        bool isRecording() const;
+
     private:
         QAudioRecorder *m_audioRecorder;
         QAudioProbe *m_probe;

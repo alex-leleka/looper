@@ -51,11 +51,11 @@ RecorderSettings::~RecorderSettings()
 }
 static QVariant boxValue(const QComboBox *box)
 {
-    int idx = box->currentIndex();
-    if (idx == -1)
+    int indx = box->currentIndex();
+    if (indx == -1)
         return QVariant();
 
-    return box->itemData(idx);
+    return box->itemData(indx);
 }
 
 void RecorderSettings::saveSettings()

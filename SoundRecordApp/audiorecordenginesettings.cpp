@@ -38,7 +38,9 @@ namespace AudioRecordEngineLib {
     {
         m_settings.setSampleRate(sRate);
     }
-
+    QAudioEncoderSettings m_settings;
+    QString m_container;
+    QString m_audioInputDevice;
     void AudioRecordEngineSettings::setBitRate(int bitRate)
     {
         m_settings.setBitRate(bitRate);
@@ -100,10 +102,5 @@ namespace AudioRecordEngineLib {
             vectDevices.push_back(device);
         }
         return vectDevices;
-    }
-    void AudioRecordEngineSettings::applyAudioRecorderSettings(AudioRecordEngine * audioRecorder) const
-    {
-        audioRecorder->m_audioRecorder->setAudioInput(m_audioInputDevice);
-        audioRecorder->m_audioRecorder->setEncodingSettings(m_settings, QVideoEncoderSettings(), m_container);
     }
 }

@@ -31,7 +31,6 @@ namespace AudioRecordEngineLib {
         QVector<int> getSampleRates() const;
         QVector<int> getBitRates() const;
         QVector<int> getChannelCounts() const;
-        void applyAudioRecorderSettings(AudioRecordEngine * audioRecorder) const;
     };
 }
 #endif // AUDIORECORDENGINESETTINGS_H
